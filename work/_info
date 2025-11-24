@@ -1,0 +1,241 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/18.1
+vpicorv32
+Z0 !s110 1763721227
+!i10b 1
+!s100 2_QMAWET8FA=>FZ6@2SG83
+IzI2zi<B>FV[je?8JDZA`30
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dD:/RISC-V-Extension-Project
+Z3 w1763658001
+Z4 8D:/RISC-V-Extension-Project/src/picorv32.v
+Z5 FD:/RISC-V-Extension-Project/src/picorv32.v
+L0 62
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1763721227.000000
+Z8 !s107 D:/RISC-V-Extension-Project/src/picorv32.v|
+Z9 !s90 -reportprogress|300|-work|work|-stats=none|D:/RISC-V-Extension-Project/src/picorv32.v|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+vpicorv32_axi
+R0
+!i10b 1
+!s100 0KD94laE>CLM6z>gJ6Gf?0
+ITjXV9SO=MRDk=0_>UOQf60
+R1
+R2
+R3
+R4
+R5
+L0 2517
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vpicorv32_axi_adapter
+R0
+!i10b 1
+!s100 XlYhPZGGomec^T3<b;Nb01
+IVA88WW`^c_lMkDObBNcOK1
+R1
+R2
+R3
+R4
+R5
+L0 2731
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vpicorv32_pcpi_div
+R0
+!i10b 1
+!s100 c::WWnDk_?[>FBYA@z`nf1
+I<6GcI[44NEN:g=cmU=AXL3
+R1
+R2
+R3
+R4
+R5
+L0 2420
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vpicorv32_pcpi_fast_mul
+R0
+!i10b 1
+!s100 _di8FU]O0acRXjd8JKa=83
+II:elOU=LiiP]<FgZNbnWf3
+R1
+R2
+R3
+R4
+R5
+L0 2318
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vpicorv32_pcpi_mul
+R0
+!i10b 1
+!s100 jAz;Ln<CDOHD=5OencAz12
+I5=k?SHDD>h1dR?[jb;k;42
+R1
+R2
+R3
+R4
+R5
+L0 2197
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vpicorv32_regs
+R0
+!i10b 1
+!s100 KdjfWCZ5Kmn9IR7QQW[Pf0
+I0M]L:?K[CX;m9[B55:Y<^3
+R1
+R2
+R3
+R4
+R5
+L0 2174
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vpicorv32_wb
+R0
+!i10b 1
+!s100 P2nn4JS]=T4I:azmMFhm92
+IFIQLB0=QdCRKoV_R0UN273
+R1
+R2
+R3
+R4
+R5
+L0 2815
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+vram_model
+R0
+!i10b 1
+!s100 _h>AJOFM=[zJLVegfJ3zA3
+I8];ROUmPe2N6U4dAMU5c[3
+R1
+R2
+w1763664412
+8D:/RISC-V-Extension-Project/src/ram_model.v
+FD:/RISC-V-Extension-Project/src/ram_model.v
+L0 3
+R6
+r1
+!s85 0
+31
+R7
+!s107 D:/RISC-V-Extension-Project/src/ram_model.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/RISC-V-Extension-Project/src/ram_model.v|
+!i113 1
+R10
+R11
+vriscv_tb
+R0
+!i10b 1
+!s100 242RND5@GkaS]W2Se_zWU2
+I>lBgZzSDziD@R:@gC2hA13
+R1
+R2
+w1763713758
+8D:/RISC-V-Extension-Project/tb/riscv_tb.v
+FD:/RISC-V-Extension-Project/tb/riscv_tb.v
+L0 3
+R6
+r1
+!s85 0
+31
+R7
+!s107 D:/RISC-V-Extension-Project/tb/riscv_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/RISC-V-Extension-Project/tb/riscv_tb.v|
+!i113 1
+R10
+R11
+vriscv_top
+R0
+!i10b 1
+!s100 MWAd<:`:E[TBFNhka5?QW2
+I8B?2nckJ7@EUi9fEX_3>A1
+R1
+R2
+w1763705158
+8D:/RISC-V-Extension-Project/src/riscv_top.v
+FD:/RISC-V-Extension-Project/src/riscv_top.v
+L0 3
+R6
+r1
+!s85 0
+31
+R7
+!s107 D:/RISC-V-Extension-Project/src/riscv_top.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/RISC-V-Extension-Project/src/riscv_top.v|
+!i113 1
+R10
+R11
