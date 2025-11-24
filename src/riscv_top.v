@@ -1,9 +1,3 @@
-// ============================================================
-// File: riscv_top.v
-// Description: Top-level system integrating PicoRV32 core + RAM
-// This is the DUT for simulation (connects CPU <-> Memory)
-// ============================================================
-
 `timescale 1ns / 1ps
 
 module riscv_top (
@@ -14,7 +8,6 @@ module riscv_top (
     // ============================================
     // PicoRV32 <-> Memory Bus Signals
     // ============================================
-
     wire        mem_valid;
     wire        mem_instr;
     wire        mem_ready;
@@ -25,26 +18,20 @@ module riscv_top (
     wire [31:0] mem_rdata;
 
     // ============================================
-    // Instantiate PicoRV32 Core
+    // PCPI (co-processor) interface wires
     // ============================================
-    picorv32 #(
-        .ENABLE_COUNTERS(0),
-        .ENABLE_COUNTERS64(0),
-        .ENABLE_REGS_16_31(1),
-        .ENABLE_REGS_DUALPORT(1),
-        .TWO_STAGE_SHIFT(1),
-        .BARREL_SHIFTER(0),
-        .TWO_CYCLE_COMPARE(0),
-        .TWO_CYCLE_ALU(0),
-        .COMPRESSED_ISA(0),
-        .ENABLE_MUL(0),
-        .ENABLE_DIV(0),
-        .ENABLE_IRQ(0),
-        .ENABLE_IRQ_QREGS(0),
-        .ENABLE_IRQ_TIMER(0),
-        .LATCHED_MEM_RDATA(0),
-        .TWO_STAGE_FETCH(0)
-    ) cpu_core (
+    wire        pcpi_valid;
+    wire [31:0] pcpi_insn;
+    wire [31:0] pcpi_rs1;
+    wire [31:0] pcpi_rs2;
+    wire        pcpi_wr;
+    wire [31:0] pcpi_rd;
+    wire        pcpi_ready;
+
+    // ============================================
+    // Instantiate PicoRV32 Core (connect PCPI)
+    // ============================================
+    picorv32 cpu_core (
         .clk         (clk),
         .resetn      (~rst),
         .mem_valid   (mem_valid),
@@ -54,25 +41,53 @@ module riscv_top (
         .mem_wdata   (mem_wdata),
         .mem_wstrb   (mem_wstrb),
         .mem_rdata   (mem_rdata),
+
+        // PCPI interface
+        .pcpi_valid  (pcpi_valid),
+        .pcpi_insn   (pcpi_insn),
+        .pcpi_rs1    (pcpi_rs1),
+        .pcpi_rs2    (pcpi_rs2),
+        .pcpi_wr     (),         // picorv32 may expose these as outputs when using pcpi, keep them unconnected
+        .pcpi_rd     (), 
+        .pcpi_ready  (),
+
         .trap        ()
     );
 
     // ============================================
-    // Instantiate RAM Model
+    // Instantiate RAM Model (use relative path to program.mem)
     // ============================================
     ram_model #(
         .DATA_WIDTH (32),
         .ADDR_WIDTH (12),
-        .MEM_FILE   ("program.mem")
+        .MEM_FILE   ("sim/program.mem")
     ) ram_inst (
         .clk        (clk),
         .rst        (rst),
         .mem_valid  (mem_valid),
-        .mem_wstrb  (|mem_wstrb),          // Write enable
-        .mem_addr   (mem_addr[13:2]),      // Word addressing (ignore lower 2 bits)
+        .mem_wstrb  (mem_wstrb),          // pass full byte strobe
+        .mem_addr   (mem_addr[13:2]),     // Word addressing (ignore low 2 bits)
         .mem_wdata  (mem_wdata),
         .mem_rdata  (mem_rdata),
         .mem_ready  (mem_ready)
+    );
+
+    // ============================================
+    // Connect PCPI ports to the SHA accelerator
+    // NOTE: picorv32's PCPI signals are outputs/inputs defined above.
+    // We use wires named exactly as picorv32 ports in the instantiation.
+    // ============================================
+    // Instantiate SHA PCPI coprocessor
+    pcpi_sha sha_coproc (
+        .clk        (clk),
+        .resetn     (~rst),
+        .pcpi_valid (pcpi_valid),
+        .pcpi_insn  (pcpi_insn),
+        .pcpi_rs1   (pcpi_rs1),
+        .pcpi_rs2   (pcpi_rs2),
+        .pcpi_wr    (pcpi_wr),
+        .pcpi_rd    (pcpi_rd),
+        .pcpi_ready (pcpi_ready)
     );
 
 endmodule

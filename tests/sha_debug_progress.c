@@ -1,11 +1,8 @@
 // sha_debug_progress.c
-// Same as sha_baseline but writes progress to 0x20 at each compression round.
-// Writes 1 to 0x10 at the end.
-
 #include <stdint.h>
 
 volatile uint32_t * const DONE_ADDR = (volatile uint32_t *)0x00000010;
-volatile uint32_t * const PROG_ADDR = (volatile uint32_t *)0x00000020; // progress register
+volatile uint32_t * const PROG_ADDR = (volatile uint32_t *)0x00000020; // write progress here
 
 #define ROTR(x,n) (((x) >> (n)) | ((x) << (32-(n))))
 #define SHR(x,n)  ((x) >> (n))
@@ -26,7 +23,6 @@ static const uint32_t H0_init[8] = {
   0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19
 };
 
-/* file-scope pre-padded block for "abc" (512-bit, standard padding) */
 static const uint8_t block_abc[64] = {
   0x61,0x62,0x63,0x80, 0x00,0x00,0x00,0x00, 0x00,0x00,0x00,0x00, 0x00,0x00,0x00,0x00,
   0x00,0x00,0x00,0x00, 0x00,0x00,0x00,0x00, 0x00,0x00,0x00,0x00, 0x00,0x00,0x00,0x00,
@@ -48,14 +44,8 @@ static void sha256_compress(uint32_t state[8], const uint8_t block[64]) {
         W[t] = W[t-16] + s0 + W[t-7] + s1;
     }
 
-    uint32_t a = state[0];
-    uint32_t b = state[1];
-    uint32_t c = state[2];
-    uint32_t d = state[3];
-    uint32_t e = state[4];
-    uint32_t f = state[5];
-    uint32_t g = state[6];
-    uint32_t h = state[7];
+    uint32_t a = state[0], b = state[1], c = state[2], d = state[3];
+    uint32_t e = state[4], f = state[5], g = state[6], h = state[7];
 
     for (int t = 0; t < 64; ++t) {
         uint32_t S1 = ROTR(e,6) ^ ROTR(e,11) ^ ROTR(e,25);
@@ -65,47 +55,30 @@ static void sha256_compress(uint32_t state[8], const uint8_t block[64]) {
         uint32_t maj = (a & b) ^ (a & c) ^ (b & c);
         uint32_t temp2 = S0 + maj;
 
-        h = g;
-        g = f;
-        f = e;
+        h = g; g = f; f = e;
         e = d + temp1;
-        d = c;
-        c = b;
-        b = a;
+        d = c; c = b; b = a;
         a = temp1 + temp2;
 
-        // Debug progress write: write current round index to PROG_ADDR
+        // Debug progress write (word address 0x20)
         *PROG_ADDR = (uint32_t)t;
     }
 
-    state[0] += a;
-    state[1] += b;
-    state[2] += c;
-    state[3] += d;
-    state[4] += e;
-    state[5] += f;
-    state[6] += g;
-    state[7] += h;
+    state[0] += a; state[1] += b; state[2] += c; state[3] += d;
+    state[4] += e; state[5] += f; state[6] += g; state[7] += h;
 }
 
 void sha256_oneblock(const uint8_t block[64], uint32_t digest[8]) {
     uint32_t state[8];
     for (int i = 0; i < 8; ++i) state[i] = H0_init[i];
-
     sha256_compress(state, block);
-
     for (int i = 0; i < 8; ++i) digest[i] = state[i];
 }
 
 int main() {
     uint32_t digest[8];
     sha256_oneblock(block_abc, digest);
-
-    // signal done
     *DONE_ADDR = 1;
-
-    // hang so TB can see write
     for (;;);
-
     return 0;
 }

@@ -1,0 +1,147 @@
+# vsim -c work.riscv_tb -do "run -all; quit" 
+# Start time: 10:01:51 on Nov 24,2025
+# Loading work.riscv_tb
+# Loading work.riscv_top
+# Loading work.picorv32
+# Loading work.ram_model
+# ** Warning: (vsim-3017) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Too few port connections. Expected 27, found 10.
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_tb/uut/cpu_core File: D:/RISC-V-Extension-Project/src/picorv32.v
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'mem_la_read'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'mem_la_write'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'mem_la_addr'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'mem_la_wdata'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'mem_la_wstrb'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'pcpi_valid'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'pcpi_insn'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'pcpi_rs1'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'pcpi_rs2'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'pcpi_wr'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'pcpi_rd'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'pcpi_wait'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'pcpi_ready'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'irq'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'eoi'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'trace_valid'.
+# ** Warning: (vsim-3722) D:/RISC-V-Extension-Project/src/riscv_top.v(22): [TFMPC] - Missing connection for port 'trace_data'.
+# ** Warning: (vsim-3015) D:/RISC-V-Extension-Project/src/riscv_top.v(43): [PCDPC] - Port size (20) does not match connection size (30) for port 'mem_addr'. The port definition is at: D:/RISC-V-Extension-Project/src/ram_model.v(12).
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_tb/uut/ram_inst File: D:/RISC-V-Extension-Project/src/ram_model.v
+# run -all
+# Loading memory (byte-wise) from sim/program.mem
+# FETCH  cycle=2 PC=0x00000000 instr=0x00000000 ready=0
+# MEM    cycle=2 addr=0x00000000 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x00000000 instr=1 ready=0
+# RAM_R  @85000 ns CYCLE=8 ADDR=0x0 RDATA=0x003ff117
+# FETCH  cycle=3 PC=0x00000000 instr=0x00000000 ready=0
+# MEM    cycle=3 addr=0x00000000 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x00000000 instr=1 ready=0
+# FETCH  cycle=4 PC=0x00000000 instr=0x003ff117 ready=1
+# MEM    cycle=4 addr=0x00000000 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x003ff117 instr=1 ready=1
+# RAM_R  @105000 ns CYCLE=10 ADDR=0x0 RDATA=0x003ff117
+# FETCH  cycle=7 PC=0x00000004 instr=0x003ff117 ready=0
+# MEM    cycle=7 addr=0x00000004 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x003ff117 instr=1 ready=0
+# RAM_R  @135000 ns CYCLE=13 ADDR=0x1 RDATA=0x00010113
+# FETCH  cycle=8 PC=0x00000004 instr=0x003ff117 ready=0
+# MEM    cycle=8 addr=0x00000004 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x003ff117 instr=1 ready=0
+# FETCH  cycle=9 PC=0x00000004 instr=0x00010113 ready=1
+# MEM    cycle=9 addr=0x00000004 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x00010113 instr=1 ready=1
+# RAM_R  @155000 ns CYCLE=15 ADDR=0x1 RDATA=0x00010113
+# FETCH  cycle=12 PC=0x00000008 instr=0x00010113 ready=0
+# MEM    cycle=12 addr=0x00000008 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x00010113 instr=1 ready=0
+# RAM_R  @185000 ns CYCLE=18 ADDR=0x2 RDATA=0x02000293
+# FETCH  cycle=13 PC=0x00000008 instr=0x00010113 ready=0
+# MEM    cycle=13 addr=0x00000008 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x00010113 instr=1 ready=0
+# FETCH  cycle=14 PC=0x00000008 instr=0x02000293 ready=1
+# MEM    cycle=14 addr=0x00000008 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x02000293 instr=1 ready=1
+# RAM_R  @205000 ns CYCLE=20 ADDR=0x2 RDATA=0x02000293
+# FETCH  cycle=17 PC=0x0000000c instr=0x02000293 ready=0
+# MEM    cycle=17 addr=0x0000000c wstrb=0x0 wdata=0xxxxxxxxx rdata=0x02000293 instr=1 ready=0
+# RAM_R  @235000 ns CYCLE=23 ADDR=0x3 RDATA=0x0022a023
+# FETCH  cycle=18 PC=0x0000000c instr=0x02000293 ready=0
+# MEM    cycle=18 addr=0x0000000c wstrb=0x0 wdata=0xxxxxxxxx rdata=0x02000293 instr=1 ready=0
+# FETCH  cycle=19 PC=0x0000000c instr=0x0022a023 ready=1
+# MEM    cycle=19 addr=0x0000000c wstrb=0x0 wdata=0xxxxxxxxx rdata=0x0022a023 instr=1 ready=1
+# RAM_R  @255000 ns CYCLE=25 ADDR=0x3 RDATA=0x0022a023
+# FETCH  cycle=22 PC=0x00000010 instr=0x0022a023 ready=0
+# MEM    cycle=22 addr=0x00000010 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x0022a023 instr=1 ready=0
+# RAM_R  @285000 ns CYCLE=28 ADDR=0x4 RDATA=0x2e0000ef
+# FETCH  cycle=23 PC=0x00000010 instr=0x0022a023 ready=0
+# MEM    cycle=23 addr=0x00000010 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x0022a023 instr=1 ready=0
+# FETCH  cycle=24 PC=0x00000010 instr=0x2e0000ef ready=1
+# MEM    cycle=24 addr=0x00000010 wstrb=0x0 wdata=0xxxxxxxxx rdata=0x2e0000ef instr=1 ready=1
+# RAM_R  @305000 ns CYCLE=30 ADDR=0x4 RDATA=0x2e0000ef
+# MEM    cycle=26 addr=0x00000020 wstrb=0xf wdata=0x003ff000 rdata=0x2e0000ef instr=0 ready=1
+# PROG_WRITE cycle=26 ADDR=0x20 WDATA=0x003ff000
+# RAM_W  @325000 ns CYCLE=32 ADDR=0x8 WDATA=0x003ff000 WSTRB=0xf
+# FETCH  cycle=29 PC=0x000002f0 instr=0x003ff000 ready=0
+# MEM    cycle=29 addr=0x000002f0 wstrb=0x0 wdata=0x003ff000 rdata=0x003ff000 instr=1 ready=0
+# RAM_R  @355000 ns CYCLE=35 ADDR=0xbc RDATA=0xfd010113
+# FETCH  cycle=30 PC=0x000002f0 instr=0x003ff000 ready=0
+# MEM    cycle=30 addr=0x000002f0 wstrb=0x0 wdata=0x003ff000 rdata=0x003ff000 instr=1 ready=0
+# FETCH  cycle=31 PC=0x000002f0 instr=0xfd010113 ready=1
+# MEM    cycle=31 addr=0x000002f0 wstrb=0x0 wdata=0x003ff000 rdata=0xfd010113 instr=1 ready=1
+# RAM_R  @375000 ns CYCLE=37 ADDR=0xbc RDATA=0xfd010113
+# FETCH  cycle=34 PC=0x000002f4 instr=0xfd010113 ready=0
+# MEM    cycle=34 addr=0x000002f4 wstrb=0x0 wdata=0x003ff000 rdata=0xfd010113 instr=1 ready=0
+# RAM_R  @405000 ns CYCLE=40 ADDR=0xbd RDATA=0x00010593
+# FETCH  cycle=35 PC=0x000002f4 instr=0xfd010113 ready=0
+# MEM    cycle=35 addr=0x000002f4 wstrb=0x0 wdata=0x003ff000 rdata=0xfd010113 instr=1 ready=0
+# FETCH  cycle=36 PC=0x000002f4 instr=0x00010593 ready=1
+# MEM    cycle=36 addr=0x000002f4 wstrb=0x0 wdata=0x003ff000 rdata=0x00010593 instr=1 ready=1
+# RAM_R  @425000 ns CYCLE=42 ADDR=0xbd RDATA=0x00010593
+# FETCH  cycle=39 PC=0x000002f8 instr=0x00010593 ready=0
+# MEM    cycle=39 addr=0x000002f8 wstrb=0x0 wdata=0x003ff000 rdata=0x00010593 instr=1 ready=0
+# RAM_R  @455000 ns CYCLE=45 ADDR=0xbe RDATA=0x41000513
+# FETCH  cycle=40 PC=0x000002f8 instr=0x00010593 ready=0
+# MEM    cycle=40 addr=0x000002f8 wstrb=0x0 wdata=0x003ff000 rdata=0x00010593 instr=1 ready=0
+# FETCH  cycle=41 PC=0x000002f8 instr=0x41000513 ready=1
+# MEM    cycle=41 addr=0x000002f8 wstrb=0x0 wdata=0x003ff000 rdata=0x41000513 instr=1 ready=1
+# RAM_R  @475000 ns CYCLE=47 ADDR=0xbe RDATA=0x41000513
+# FETCH  cycle=44 PC=0x000002fc instr=0x41000513 ready=0
+# MEM    cycle=44 addr=0x000002fc wstrb=0x0 wdata=0x003ff000 rdata=0x41000513 instr=1 ready=0
+# RAM_R  @505000 ns CYCLE=50 ADDR=0xbf RDATA=0x02112623
+# FETCH  cycle=45 PC=0x000002fc instr=0x41000513 ready=0
+# MEM    cycle=45 addr=0x000002fc wstrb=0x0 wdata=0x003ff000 rdata=0x41000513 instr=1 ready=0
+# FETCH  cycle=46 PC=0x000002fc instr=0x02112623 ready=1
+# MEM    cycle=46 addr=0x000002fc wstrb=0x0 wdata=0x003ff000 rdata=0x02112623 instr=1 ready=1
+# RAM_R  @525000 ns CYCLE=52 ADDR=0xbf RDATA=0x02112623
+# FETCH  cycle=49 PC=0x00000300 instr=0x02112623 ready=0
+# MEM    cycle=49 addr=0x00000300 wstrb=0x0 wdata=0x003ff000 rdata=0x02112623 instr=1 ready=0
+# RAM_R  @555000 ns CYCLE=55 ADDR=0xc0 RDATA=0xd19ff0ef
+# FETCH  cycle=50 PC=0x00000300 instr=0x02112623 ready=0
+# MEM    cycle=50 addr=0x00000300 wstrb=0x0 wdata=0x003ff000 rdata=0x02112623 instr=1 ready=0
+# FETCH  cycle=51 PC=0x00000300 instr=0xd19ff0ef ready=1
+# MEM    cycle=51 addr=0x00000300 wstrb=0x0 wdata=0x003ff000 rdata=0xd19ff0ef instr=1 ready=1
+# RAM_R  @575000 ns CYCLE=57 ADDR=0xc0 RDATA=0xd19ff0ef
+# MEM    cycle=53 addr=0x003feffc wstrb=0xf wdata=0x00000014 rdata=0xd19ff0ef instr=0 ready=1
+# RAM_W  @595000 ns CYCLE=59 ADDR=0xffbff WDATA=0x00000014 WSTRB=0xf
+# FETCH  cycle=56 PC=0x00000018 instr=0x00000014 ready=0
+# MEM    cycle=56 addr=0x00000018 wstrb=0x0 wdata=0x00000014 rdata=0x00000014 instr=1 ready=0
+# RAM_R  @625000 ns CYCLE=62 ADDR=0x6 RDATA=0x6a09e7b7
+# FETCH  cycle=57 PC=0x00000018 instr=0x00000014 ready=0
+# MEM    cycle=57 addr=0x00000018 wstrb=0x0 wdata=0x00000014 rdata=0x00000014 instr=1 ready=0
+# FETCH  cycle=58 PC=0x00000018 instr=0x6a09e7b7 ready=1
+# MEM    cycle=58 addr=0x00000018 wstrb=0x0 wdata=0x00000014 rdata=0x6a09e7b7 instr=1 ready=1
+# RAM_R  @645000 ns CYCLE=64 ADDR=0x6 RDATA=0x6a09e7b7
+# FETCH  cycle=61 PC=0x0000001c instr=0x6a09e7b7 ready=0
+# MEM    cycle=61 addr=0x0000001c wstrb=0x0 wdata=0x00000014 rdata=0x6a09e7b7 instr=1 ready=0
+# RAM_R  @675000 ns CYCLE=67 ADDR=0x7 RDATA=0xfd010113
+# FETCH  cycle=62 PC=0x0000001c instr=0x6a09e7b7 ready=0
+# MEM    cycle=62 addr=0x0000001c wstrb=0x0 wdata=0x00000014 rdata=0x6a09e7b7 instr=1 ready=0
+# FETCH  cycle=63 PC=0x0000001c instr=0xfd010113 ready=1
+# MEM    cycle=63 addr=0x0000001c wstrb=0x0 wdata=0x00000014 rdata=0xfd010113 instr=1 ready=1
+# RAM_R  @695000 ns CYCLE=69 ADDR=0x7 RDATA=0xfd010113
+# FETCH  cycle=66 PC=0x00000020 instr=0xfd010113 ready=0
+# MEM    cycle=66 addr=0x00000020 wstrb=0x0 wdata=0x00000014 rdata=0xfd010113 instr=1 ready=0
+# RAM_R  @725000 ns CYCLE=72 ADDR=0x8 RDATA=0x003ff000
+# FETCH  cycle=67 PC=0x00000020 instr=0xfd010113 ready=0
+# MEM    cycle=67 addr=0x00000020 wstrb=0x0 wdata=0x00000014 rdata=0xfd010113 instr=1 ready=0
+# FETCH  cycle=68 PC=0x00000020 instr=0x003ff000 ready=1
+# MEM    cycle=68 addr=0x00000020 wstrb=0x0 wdata=0x00000014 rdata=0x003ff000 instr=1 ready=1
+# RAM_R  @745000 ns CYCLE=74 ADDR=0x8 RDATA=0x003ff000
+# FETCH  cycle=71 PC=0x00000024 instr=0x003ff000 ready=0
+# MEM    cycle=71 addr=0x00000024 wstrb=0x0 wdata=0x00000014 rdata=0x003ff000 instr=1 ready=0
+# RAM_R  @775000 ns CYCLE=77 ADDR=0x9 RDATA=0x00f12023
+# FETCH  cycle=72 PC=0x00000024 instr=0x003ff000 ready=0
+# MEM    cycle=72 addr=0x00000024 wstrb=0x0 wdata=0x00000014 rdata=0x003ff000 instr=1 ready=0
+# FETCH  cycle=73 PC=0x00000024 instr=0x00f12023 ready=1
+# MEM    cycle=73 addr=0x00000024 wstrb=0x0 wdata=0x00000014 rdata=0x00f12023 instr=1 ready=1
+# RAM_R  @795000 ns CYCLE=79 ADDR=0x9 RDATA=0x00f12023
+# Break key hit
