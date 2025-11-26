@@ -18,6 +18,7 @@ volatile u32 * const DONE_ADDR = (volatile u32*)0x00000010;
    - "+r"(a0) tells the compiler 'a0' is read/write.
    - we include a trailing newline in the asm string which some assemblers expect.
 */
+
 static inline u32 sha_accel_instr(u32 in) {
     register u32 a0 asm("a0") = in;
     asm volatile (".word 0x0005050b\n" : "+r"(a0) : : "memory");

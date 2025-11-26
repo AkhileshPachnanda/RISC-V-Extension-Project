@@ -1,16 +1,13 @@
-// tests/sha_baseline_progress.c
-// Baseline SHA-256 single-block; writes progress to 0x20 every 8 rounds.
-// Writes 1 to 0x10 on completion.
-
 #include <stdint.h>
 
 volatile uint32_t * const DONE_ADDR = (volatile uint32_t *)0x00000010;
 volatile uint32_t * const PROG_ADDR = (volatile uint32_t *)0x00000020;
 
+/* result area where digest words will be written for TB visibility */
+volatile uint32_t * const RESULT_ADDR = (volatile uint32_t *)0x00000100;
+
 #define ROTR(x,n) (((x) >> (n)) | ((x) << (32-(n))))
 #define SHR(x,n)  ((x) >> (n))
-
-
 
 static const uint32_t K[64] = {
   0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
@@ -35,7 +32,6 @@ static const uint8_t block_abc[64] = {
   0x00,0x00,0x00,0x00, 0x00,0x00,0x00,0x00, 0x00,0x00,0x00,0x18
 };
 
-/* static workspace so no stack overflows */
 static uint32_t W_static[64];
 
 static void sha256_compress(uint32_t state[8], const uint8_t block[64]) {
@@ -53,7 +49,7 @@ static void sha256_compress(uint32_t state[8], const uint8_t block[64]) {
 
         /* progress write: every 8 expansions write a progress counter to PROG_ADDR */
         if ((t & 7) == 0) {
-            *PROG_ADDR = t; // small write for TB visibility
+            *PROG_ADDR = 0x200 | (uint32_t)t; // expansion-phase marker
         }
     }
 
@@ -75,7 +71,7 @@ static void sha256_compress(uint32_t state[8], const uint8_t block[64]) {
 
         /* also write progress inside main loop every 16 rounds */
         if ((t & 15) == 0) {
-            *PROG_ADDR = 0x100 + t;
+            *PROG_ADDR = 0x300 | (uint32_t)t; // main-loop marker
         }
     }
 
@@ -91,13 +87,27 @@ void sha256_oneblock(const uint8_t block[64], uint32_t digest[8]) {
 }
 
 int main() {
+    /* initial start marker */
+    *PROG_ADDR = 0x11111111;
+
     uint32_t digest[8];
     sha256_oneblock(block_abc, digest);
 
-    // final done
+    /* finished hashing marker */
+    *PROG_ADDR = 0x22222222;
+
+    /* write digest words to RESULT_ADDR (0x100..0x11C) so TB can read/print them */
+    for (int i = 0; i < 8; ++i) {
+        RESULT_ADDR[i] = digest[i];
+    }
+
+    /* final done flag for TB */
     *DONE_ADDR = 1;
 
-    // hang
-    for (;;) ;
+    /* final progress tag */
+    *PROG_ADDR = 0xF00DF00D;
+
+    /* hang so simulator doesn't exit unexpectedly */
+    for (;;) asm volatile("nop");
     return 0;
 }

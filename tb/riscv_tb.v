@@ -1,63 +1,68 @@
-`timescale 1ns/1ps
+`timescale 1ns / 1ps
 
-module riscv_tb;
+module riscv_tb_diag2;
 
+    // Signals
     reg clk = 0;
     reg rst = 1;
+    reg [31:0] cycle_count = 0;
 
-    // Clock period = 10ns (100 MHz)
-    always #5 clk = ~clk;
-
-    // Instantiate the CPU top-level
+    // Instantiate the Unit Under Test (UUT)
     riscv_top uut (
         .clk(clk),
         .rst(rst)
     );
 
-    integer cycle_count = 0;
-
-    // === SIMULATION TIMEOUT (PREVENT HANGS) ===
-    integer GLOBAL_TIMEOUT = 2000000;  // 2,000,000 cycles safety limit
-
-    // =======================================================
-    //  Monitor for memory write to address 0x10 (DONE flag)
-    // =======================================================
-    wire mem_write = uut.mem_valid && (uut.mem_wstrb != 4'b0000);
-    wire [31:0] mem_addr = uut.mem_addr;
-    wire [31:0] mem_wdata = uut.mem_wdata;
+    // Clock generation (100 MHz -> 10 ns period)
+    always #5 clk = ~clk;  // Toggle every 5 ns
 
     // Cycle counter
     always @(posedge clk) begin
-        if (!rst)
+        if (!rst) begin
             cycle_count <= cycle_count + 1;
+        end
     end
 
-    // DONE detection + finish logic
-    always @(posedge clk) begin
-        if (!rst) begin
-            if (mem_write && mem_addr == 32'h10) begin
-                $display("=======================================================");
-                $display(" PROGRAM FINISHED ");
-                $display(" Cycle count = %0d", cycle_count);
-                $display(" Write data  = 0x%08h", mem_wdata);
-                $display("=======================================================");
-                $finish;
-            end
+    // Initial reset sequence
+    initial begin
+        rst = 1;
+        #20;  // Hold reset for 20 ns
+        rst = 0;
+    end
 
-            // Timeout protection
-            if (cycle_count > GLOBAL_TIMEOUT) begin
-                $display("********** SIM TIMEOUT AFTER %0d CYCLES **********", cycle_count);
-                $finish;
+    // Timeout mechanism (reduced to 1 ms for faster testing)
+    initial begin
+        #1000000;  // 1 ms (in ps units: 1e6 ns)
+        $display("TIMEOUT! Simulation ended with no completion signal after %d cycles.", cycle_count);
+        $finish;
+    end
+
+    // Debug monitoring: Print all memory accesses from start
+    always @(posedge clk) begin
+        if (!rst && uut.mem_valid) begin
+            if (^uut.mem_addr === 1'bx || ^uut.mem_rdata === 1'bx) begin
+                $display("@%0t: <unknown> - PC: %h, mem_addr: %h, mem_rdata: %h (possible stall or garbage fetch)", 
+                         $time, uut.cpu_core.reg_pc, uut.mem_addr, uut.mem_rdata);
+            end else begin
+                $display("@%0t: Cycle %d - PC: %h, mem_valid: %b, mem_instr: %b, mem_addr: %h, mem_rdata: %h, mem_wdata: %h, mem_wstrb: %h",
+                         $time, cycle_count, uut.cpu_core.reg_pc, uut.mem_valid, uut.mem_instr, uut.mem_addr, uut.mem_rdata, uut.mem_wdata, uut.mem_wstrb);
             end
         end
     end
 
-    // Reset pulse
-    initial begin
-        $display("Loading memory (byte-wise) from sim/program.mem");
-        rst = 1;
-        repeat (5) @(posedge clk);
-        rst = 0;
+    // Completion detection: Monitor write to DONE_ADDR (0x00000010)
+    always @(posedge clk) begin
+        if (!rst && uut.mem_valid && uut.mem_addr == 32'h00000010 && |uut.mem_wstrb && uut.mem_wdata != 0) begin
+            $display("Completion signal detected! Value written to DONE_ADDR: %h after %d cycles.", uut.mem_wdata, cycle_count);
+            $finish;
+        end
+    end
+
+    // Trap monitor
+    always @(posedge clk) begin
+        if (uut.cpu_core.trap) begin
+            $display("TRAP asserted at cycle %d! Possible illegal instruction or exception. PC: %h", cycle_count, uut.cpu_core.reg_pc);
+        end
     end
 
 endmodule

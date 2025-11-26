@@ -2,7 +2,7 @@
 
 module ram_model #(
     parameter DATA_WIDTH = 32,               // word width returned on reads
-    parameter ADDR_WIDTH = 20,               // number of address bits for word indexing
+    parameter ADDR_WIDTH = 20,               // increased to 20 for 1MB to cover high addresses
     parameter MEM_FILE   = "sim/program.mem" // $readmemh file (expected as byte tokens)
 )(
     input  wire                     clk,
@@ -12,7 +12,7 @@ module ram_model #(
     input  wire [ADDR_WIDTH-1:0]    mem_addr,                    // WORD index (as used by riscv_top: mem_addr[31:2])
     input  wire [DATA_WIDTH-1:0]    mem_wdata,
     output reg  [DATA_WIDTH-1:0]    mem_rdata,
-    output reg                      mem_ready
+    output wire                     mem_ready                    // changed to wire for combinational
 );
 
     // Total number of bytes = 2^(ADDR_WIDTH + 2)
@@ -21,12 +21,6 @@ module ram_model #(
 
     // Byte-addressable memory array
     reg [7:0] memory_bytes [0:MEM_BYTES-1];
-
-    // Request latch to create a 1-cycle response delay
-    reg req_valid;
-    reg [ADDR_WIDTH-1:0] req_addr;
-    reg [DATA_WIDTH-1:0] req_wdata;
-    reg [3:0] req_wstrb;
 
     // integers (declared at module scope for ModelSim)
     integer i;
@@ -56,47 +50,37 @@ module ram_model #(
         end
     endfunction
 
-    always @(posedge clk) begin
+    // Combinational logic for immediate response (no 1-cycle delay)
+    assign mem_ready = mem_valid;  // Assert ready immediately when valid
+
+    always @* begin
         if (rst) begin
-            req_valid <= 1'b0;
-            mem_ready <= 1'b0;
-            mem_rdata <= {DATA_WIDTH{1'b0}};
-        end else begin
-            // Capture incoming request (word-indexed) if none pending
-            if (mem_valid && !req_valid) begin
-                req_valid <= 1'b1;
-                req_addr  <= mem_addr;   // word index
-                req_wdata <= mem_wdata;
-                req_wstrb <= mem_wstrb;
-                mem_ready <= 1'b0;
-            end else if (req_valid) begin
-                // Serve captured request this cycle (1-cycle delayed)
-                mem_ready <= 1'b1;
+            mem_rdata = {DATA_WIDTH{1'b0}};
+        end else if (mem_valid) begin
+            // compute base byte address from word index
+            base = mem_addr << 2; // multiply by 4
 
-                // compute base byte address from word index
-                base = req_addr << 2; // multiply by 4
-
-                if (|req_wstrb) begin
+            if (base >= MEM_BYTES) begin
+                mem_rdata = 32'h00000000;  // Return illegal instruction for out-of-bounds to trigger trap
+                $display("Out-of-bounds memory access at addr %h (base %d > %d)", mem_addr, base, MEM_BYTES);
+            end else begin
+                if (|mem_wstrb) begin
                     // write-bytes according to wstrb (wstrb[0] -> lowest byte)
-                    if (req_wstrb[0]) memory_bytes[base + 0] <= req_wdata[7:0];
-                    if (req_wstrb[1]) memory_bytes[base + 1] <= req_wdata[15:8];
-                    if (req_wstrb[2]) memory_bytes[base + 2] <= req_wdata[23:16];
-                    if (req_wstrb[3]) memory_bytes[base + 3] <= req_wdata[31:24];
+                    if (mem_wstrb[0]) memory_bytes[base + 0] = mem_wdata[7:0];
+                    if (mem_wstrb[1]) memory_bytes[base + 1] = mem_wdata[15:8];
+                    if (mem_wstrb[2]) memory_bytes[base + 2] = mem_wdata[23:16];
+                    if (mem_wstrb[3]) memory_bytes[base + 3] = mem_wdata[31:24];
 
-                    mem_rdata <= req_wdata; // echo write
-                    // $display("RAM_W  @%0t ns CYCLE=%0d ADDR=0x%0h WDATA=0x%08h WSTRB=0x%0h",
-                    //$time, $time/10, req_addr, req_wdata, req_wstrb);
+                    mem_rdata = mem_wdata; // echo write
+                    // $display("RAM_W ADDR=0x%0h WDATA=0x%08h WSTRB=0x%0h", mem_addr, mem_wdata, mem_wstrb);
                 end else begin
                     // read 32-bit little-endian word assembled from 4 bytes
-                    mem_rdata <= read_word_le(base);
-                    // $display("RAM_R  @%0t ns CYCLE=%0d ADDR=0x%0h RDATA=0x%08h",
-                    //         $time, $time/10, req_addr, read_word_le(base));
+                    mem_rdata = read_word_le(base);
+                    // $display("RAM_R ADDR=0x%0h RDATA=0x%08h", mem_addr, read_word_le(base));
                 end
-
-                req_valid <= 1'b0;
-            end else begin
-                mem_ready <= 1'b0;
             end
+        end else begin
+            mem_rdata = {DATA_WIDTH{1'b0}};
         end
     end
 
