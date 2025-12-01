@@ -9,275 +9,254 @@ z2
 cModel Technology
 Z0 dD:/RISC-V-Extension-Project
 vpcpi_sha
-Z1 !s110 1764139148
+!s110 1764588416
 !i10b 1
 !s100 88Dk]ARUJBY5G`PT;WD>d3
 I^_4aa_S]aO6TA9Z40iJZV0
-Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z1 VDg1SIo80bB@j0V0VzS_@n1
 R0
 w1764129878
 8D:/RISC-V-Extension-Project/src/pcpi_sha.v
 FD:/RISC-V-Extension-Project/src/pcpi_sha.v
 L0 7
-Z3 OV;L;10.5b;63
+Z2 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z4 !s108 1764139148.000000
+!s108 1764588416.000000
 !s107 D:/RISC-V-Extension-Project/src/pcpi_sha.v|
 !s90 -reportprogress|300|-work|work|-stats=none|D:/RISC-V-Extension-Project/src/pcpi_sha.v|
 !i113 1
-Z5 o-work work
-Z6 tCvgOpt 0
+Z3 o-work work
+Z4 tCvgOpt 0
 vpicorv32
-R1
+Z5 !s110 1764588415
 !i10b 1
 !s100 2_QMAWET8FA=>FZ6@2SG83
 IzI2zi<B>FV[je?8JDZA`30
-R2
+R1
 R0
-Z7 w1763658001
-Z8 8D:/RISC-V-Extension-Project/src/picorv32.v
-Z9 FD:/RISC-V-Extension-Project/src/picorv32.v
+Z6 w1763658001
+Z7 8D:/RISC-V-Extension-Project/src/picorv32.v
+Z8 FD:/RISC-V-Extension-Project/src/picorv32.v
 L0 62
-R3
+R2
 r1
 !s85 0
 31
-R4
+Z9 !s108 1764588415.000000
 Z10 !s107 D:/RISC-V-Extension-Project/src/picorv32.v|
 Z11 !s90 -reportprogress|300|-work|work|-stats=none|D:/RISC-V-Extension-Project/src/picorv32.v|
 !i113 1
-R5
-R6
+R3
+R4
 vpicorv32_axi
-R1
+R5
 !i10b 1
 !s100 0KD94laE>CLM6z>gJ6Gf?0
 ITjXV9SO=MRDk=0_>UOQf60
-R2
+R1
 R0
+R6
 R7
 R8
-R9
 L0 2517
-R3
+R2
 r1
 !s85 0
 31
-R4
+R9
 R10
 R11
 !i113 1
-R5
-R6
+R3
+R4
 vpicorv32_axi_adapter
-R1
+R5
 !i10b 1
 !s100 XlYhPZGGomec^T3<b;Nb01
 IVA88WW`^c_lMkDObBNcOK1
-R2
+R1
 R0
+R6
 R7
 R8
-R9
 L0 2731
-R3
+R2
 r1
 !s85 0
 31
-R4
+R9
 R10
 R11
 !i113 1
-R5
-R6
+R3
+R4
 vpicorv32_pcpi_div
-R1
+R5
 !i10b 1
 !s100 c::WWnDk_?[>FBYA@z`nf1
 I<6GcI[44NEN:g=cmU=AXL3
-R2
+R1
 R0
+R6
 R7
 R8
-R9
 L0 2420
-R3
+R2
 r1
 !s85 0
 31
-R4
+R9
 R10
 R11
 !i113 1
-R5
-R6
+R3
+R4
 vpicorv32_pcpi_fast_mul
-R1
+R5
 !i10b 1
 !s100 _di8FU]O0acRXjd8JKa=83
 II:elOU=LiiP]<FgZNbnWf3
-R2
+R1
 R0
+R6
 R7
 R8
-R9
 L0 2318
-R3
+R2
 r1
 !s85 0
 31
-R4
+R9
 R10
 R11
 !i113 1
-R5
-R6
+R3
+R4
 vpicorv32_pcpi_mul
-R1
+R5
 !i10b 1
 !s100 jAz;Ln<CDOHD=5OencAz12
 I5=k?SHDD>h1dR?[jb;k;42
-R2
+R1
 R0
+R6
 R7
 R8
-R9
 L0 2197
-R3
+R2
 r1
 !s85 0
 31
-R4
+R9
 R10
 R11
 !i113 1
-R5
-R6
+R3
+R4
 vpicorv32_regs
-R1
+R5
 !i10b 1
 !s100 KdjfWCZ5Kmn9IR7QQW[Pf0
 I0M]L:?K[CX;m9[B55:Y<^3
-R2
+R1
 R0
+R6
 R7
 R8
-R9
 L0 2174
-R3
+R2
 r1
 !s85 0
 31
-R4
+R9
 R10
 R11
 !i113 1
-R5
-R6
+R3
+R4
 vpicorv32_wb
-R1
+R5
 !i10b 1
 !s100 P2nn4JS]=T4I:azmMFhm92
 IFIQLB0=QdCRKoV_R0UN273
-R2
+R1
 R0
+R6
 R7
 R8
-R9
 L0 2815
-R3
+R2
 r1
 !s85 0
 31
-R4
+R9
 R10
 R11
 !i113 1
-R5
-R6
+R3
+R4
 vram_model
-R1
+R5
 !i10b 1
-!s100 MEg<DaBc4QjHJ?PdM7mJD0
-IVVeZ2<bTH^W:DSB@HZIb:0
-R2
+!s100 [_Pl@`K525azcXmDd=Y:z1
+IHUfaVRW[Jk7WUn:2>ONm11
+R1
 R0
-w1764138065
+w1764587944
 8D:/RISC-V-Extension-Project/src/ram_model.v
 FD:/RISC-V-Extension-Project/src/ram_model.v
 L0 3
-R3
+R2
 r1
 !s85 0
 31
-R4
+R9
 !s107 D:/RISC-V-Extension-Project/src/ram_model.v|
 !s90 -reportprogress|300|-work|work|-stats=none|D:/RISC-V-Extension-Project/src/ram_model.v|
 !i113 1
-R5
-R6
+R3
+R4
 vriscv_tb
-!s110 1764136688
+!s110 1764588414
 !i10b 1
-!s100 ]5BTaooL7lab[48DTXI_31
-I83]DQS=E6jY;eMSUWlNGb0
-R2
+!s100 ;[zSd]:bGUCc[;C:KCD=N0
+IeeB;G:k0Ki@HXJfRdX_nJ1
+R1
 R0
-w1764136678
-Z12 8D:/RISC-V-Extension-Project/tb/riscv_tb.v
-Z13 FD:/RISC-V-Extension-Project/tb/riscv_tb.v
-L0 3
-R3
+w1764584381
+8D:/RISC-V-Extension-Project/tb/riscv_tb.v
+FD:/RISC-V-Extension-Project/tb/riscv_tb.v
+L0 2
+R2
 r1
 !s85 0
 31
-!s108 1764136688.000000
-Z14 !s107 D:/RISC-V-Extension-Project/tb/riscv_tb.v|
-Z15 !s90 -reportprogress|300|-work|work|-stats=none|D:/RISC-V-Extension-Project/tb/riscv_tb.v|
+Z12 !s108 1764588414.000000
+!s107 D:/RISC-V-Extension-Project/tb/riscv_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/RISC-V-Extension-Project/tb/riscv_tb.v|
 !i113 1
-R5
-R6
-vriscv_tb_diag2
-Z16 !s110 1764139147
-!i10b 1
-!s100 o8eV1RNcenl0fYz5PI8XG2
-IH895OLPi1c@CZd:SEUV7b3
-R2
-R0
-w1764138087
-R12
-R13
-L0 3
 R3
-r1
-!s85 0
-31
-Z17 !s108 1764139147.000000
-R14
-R15
-!i113 1
-R5
-R6
+R4
 vriscv_top
-R16
+R5
 !i10b 1
 !s100 aDHmVG6Mk_W`U90a]MdN^1
 IRkD>VVVNRN::cl0]Mf5k[1
-R2
+R1
 R0
 w1764135977
 8D:/RISC-V-Extension-Project/src/riscv_top.v
 FD:/RISC-V-Extension-Project/src/riscv_top.v
 L0 5
-R3
+R2
 r1
 !s85 0
 31
-R17
+R12
 !s107 D:/RISC-V-Extension-Project/src/riscv_top.v|
 !s90 -reportprogress|300|-work|work|-stats=none|D:/RISC-V-Extension-Project/src/riscv_top.v|
 !i113 1
-R5
-R6
+R3
+R4

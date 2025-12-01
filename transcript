@@ -1,16 +1,18 @@
-# vsim -c work.riscv_tb -do "run -all; quit" 
-# Start time: 10:27:23 on Nov 26,2025
+# vsim -voptargs="+acc" work.riscv_tb 
+# Start time: 16:44:50 on Dec 01,2025
 # Loading work.riscv_tb
 # Loading work.riscv_top
 # Loading work.picorv32
 # Loading work.pcpi_sha
 # Loading work.ram_model
-# ** Warning: (vsim-3015) ./src/riscv_top.v(57): [PCDPC] - Port size (32) does not match connection size (1) for port 'eoi'. The port definition is at: ./src/picorv32.v(121).
-#    Time: 0 ps  Iteration: 0  Instance: /riscv_tb/uut/cpu_core File: ./src/picorv32.v
-# run -all
+run -all
 # Loading memory (byte-wise) from sim/program.mem
-# TIMEOUT! Simulation ended with no completion signal.
-# ** Note: $finish    : ./tb/riscv_tb.v(67)
+# Starting simulation...
+# Reset released — CPU running
+# *** TIMEOUT — no write to 0x10 after 999998 cycles
+# ** Note: $finish    : tb/riscv_tb.v(59)
 #    Time: 20 ms  Iteration: 0  Instance: /riscv_tb
-# End time: 10:27:25 on Nov 26,2025, Elapsed time: 0:00:02
-# Errors: 0, Warnings: 1
+# 1
+# Break in Module riscv_tb at tb/riscv_tb.v line 59
+# End time: 16:48:02 on Dec 01,2025, Elapsed time: 0:03:12
+# Errors: 0, Warnings: 0

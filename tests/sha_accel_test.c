@@ -34,6 +34,9 @@ static inline u32 sha_accel_instr(u32 in) {
     return 0;
 }
 
+
+
+
 #endif /* __riscv */
 
 int main(void) {

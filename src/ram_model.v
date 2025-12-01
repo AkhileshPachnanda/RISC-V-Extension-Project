@@ -3,7 +3,7 @@
 module ram_model #(
     parameter DATA_WIDTH = 32,               // word width returned on reads
     parameter ADDR_WIDTH = 20,               // increased to 20 for 1MB to cover high addresses
-    parameter MEM_FILE   = "sim/program.mem" // $readmemh file (expected as byte tokens)
+    parameter MEM_FILE   = "D:/test_sim/program.mem" // $readmemh file (expected as byte tokens)
 )(
     input  wire                     clk,
     input  wire                     rst,
