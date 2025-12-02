@@ -36,14 +36,16 @@ module pcpi_sha (
         pcpi_wait  = 1'b0;
         pcpi_ready = 1'b0;
 
-        if (pcpi_valid && (opcode == OPC_CUSTOM0)) begin
-            // Accept all CUSTOM0 funct3; only funct3==000 does SHA, others pass-through
-            if (funct3 == 3'b000)
-                pcpi_rd = rotr(pcpi_rs1, 2) ^ rotr(pcpi_rs1, 13) ^ rotr(pcpi_rs1, 22);
-            else
-                pcpi_rd = pcpi_rs1; // baseline fallback
-            pcpi_wr    = 1'b1;
-            pcpi_ready = 1'b1;
+        if (pcpi_valid) begin
+            if ((opcode == OPC_CUSTOM0) && (funct3 == 3'b000)) begin
+                // SHA instruction - compute and signal ready
+                pcpi_rd    = rotr(pcpi_rs1, 2) ^ rotr(pcpi_rs1, 13) ^ rotr(pcpi_rs1, 22);
+                pcpi_wr    = 1'b1;
+                pcpi_ready = 1'b1;
+            end else begin
+                // Not our instruction - signal ready immediately without writing
+                pcpi_ready = 1'b1;
+            end
         end
     end
 

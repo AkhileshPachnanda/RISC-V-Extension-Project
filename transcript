@@ -1,18 +1,16 @@
-# vsim -voptargs="+acc" work.riscv_tb 
-# Start time: 16:44:50 on Dec 01,2025
+# vsim -c -do "run 500; quit" riscv_tb 
+# Start time: 10:35:21 on Dec 02,2025
 # Loading work.riscv_tb
 # Loading work.riscv_top
 # Loading work.picorv32
 # Loading work.pcpi_sha
 # Loading work.ram_model
-run -all
-# Loading memory (byte-wise) from sim/program.mem
+# Loading work.picorv32_pcpi_mul
+# Loading work.picorv32_pcpi_div
+# run 500
+# Loading memory (byte) from C:/Users/devan/Documents/GitHub/RISC-V/RISC-V-Extension-Project/sim/program.mem
+# First 4 bytes: b7 e7 09 6a
 # Starting simulation...
-# Reset released — CPU running
-# *** TIMEOUT — no write to 0x10 after 999998 cycles
-# ** Note: $finish    : tb/riscv_tb.v(59)
-#    Time: 20 ms  Iteration: 0  Instance: /riscv_tb
-# 1
-# Break in Module riscv_tb at tb/riscv_tb.v line 59
-# End time: 16:48:02 on Dec 01,2025, Elapsed time: 0:03:12
+#  quit
+# End time: 10:35:22 on Dec 02,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
