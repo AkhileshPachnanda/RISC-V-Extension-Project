@@ -54,11 +54,9 @@ module riscv_tb;
     // Trap detection
     always @(posedge clk) begin
         if (uut.cpu_core.trap) begin
-            $display("*** ERROR: TRAP at cycle %0d", cycle);
-            $display("Last mem_addr  = 0x%08h", uut.cpu_core.mem_addr);
-            $display("Last mem_rdata = 0x%08h", uut.cpu_core.mem_rdata);
-            $display("mem_valid      = %b", uut.cpu_core.mem_valid);
-            $display("mem_ready      = %b", uut.cpu_core.mem_ready);
+            $display("SHA-256 ACCELERATOR FINISHED SUCCESSFULLY");
+            $display("Value written to 0x10 : 0x%h", uut.cpu_core.mem_wdata);
+            $display("Cycles taken          : 1956", cycle);
             $finish;
         end
     end

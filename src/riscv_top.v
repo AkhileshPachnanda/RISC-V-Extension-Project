@@ -97,7 +97,7 @@ module riscv_top (
     ram_model #(
         .DATA_WIDTH (32),
         .ADDR_WIDTH (20),
-        .MEM_FILE   ("C:/Users/devan/Documents/GitHub/RISC-V/RISC-V-Extension-Project/sim/program.mem")
+        .MEM_FILE   ("sim/program.mem")
     ) ram_inst (
         .clk       (clk),
         .resetn    (~rst),      // SAME reset polarity as CPU
