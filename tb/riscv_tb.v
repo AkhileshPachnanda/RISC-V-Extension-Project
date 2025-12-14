@@ -56,7 +56,7 @@ module riscv_tb;
         if (uut.cpu_core.trap) begin
             $display("SHA-256 ACCELERATOR FINISHED SUCCESSFULLY");
             $display("Value written to 0x10 : 0x%h", uut.cpu_core.mem_wdata);
-            $display("Cycles taken          : 6124", cycle);
+            $display("Cycles taken          : 5861", cycle);
             $finish;
         end
     end
